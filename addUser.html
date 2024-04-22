@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="addUser()">
+Enter UserName:<input id="UserName" value="" type="text">
+Enter UserPassword:<input id="Password" value="" type="text">
+Enter UserRole (UpperCase):<input id="Role" value="" type="text"><br>
+Submit: <input id="button" type="button" value="Submit!"onClick="addUser()">
+
+
+</form>
+
+
+<script>
+function addUser(){
+	var userName = document.getElementById("UserName").value;
+	var Password = document.getElementById("Password"). value;
+	var Role = document.getElementById("Role").value;
+	
+	const request = new XMLHttpRequest();
+	var theUrl = `/admin/newUser/${userName}/${Password}/${Role}`
+	console.log(theUrl);
+	request.open("GET",theUrl);
+	request.send();
+	request.onload = ()=>{
+	}
+	
+		return "User Added"
+	}
+	
+</script>
+</body>
+</html>

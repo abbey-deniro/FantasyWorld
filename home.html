@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Fantasy World API</title>
+</head>
+<body>
+	<label for="dropdown">Choose group:</label>
+	<select id="dropdown">
+		<option disabled selected value>-- select an option --</option>
+		<option value="planets" id="planets">Planets</option>
+		<option value="crystals" id="crystals">Crystals</option>
+		<option value="stars" id="stars">Stars</option>
+		<option value="materials" id="materials">Materials</option>
+	</select>
+	<br>
+	<br>
+
+
+
+
+	<button onclick="add()">Add</button>
+	<button onclick="update()">Update</button>
+	<button onclick="getById()">Get by ID</button>
+	<button onclick="getAll()">Get All</button>
+	<button onclick="deleteEntry()">Delete</button>
+	
+
+	<p id="myResponse"></p>
+
+
+
+	<p id="demo"></p>
+
+	<script type="text/javascript">
+	
+	//GET BY ID
+	
+	function getById() {
+			var dropdown = document.getElementById("dropdown");
+			var dropdownValue = dropdown.value;
+			console.log(dropdownValue);
+			
+			if (dropdownValue == 'planets') {
+				
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formGet");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormGet");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getPlanetID()")
+				submitBTN.setAttribute("value", "Get Planet");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+				}
+			
+				if (dropdownValue == 'stars') {
+				
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formGet");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormGet");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getStarID()")
+				submitBTN.setAttribute("value", "Get Star");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+				}
+				
+				if (dropdownValue == 'crystals') {
+					
+					var br = document.createElement("br");
+					var form = document.createElement("form");
+					form.setAttribute("method", "post");
+					form.setAttribute("id", "formGet");
+					// Change this line later with getmapping
+					form.setAttribute("action", "submit");
+
+					var id = document.createElement("input");
+					id.setAttribute("type", "text");
+					id.setAttribute("name", "id");
+					id.setAttribute("placeholder", "id:");
+					id.setAttribute("id", "idFormGet");
+
+					var submitBTN = document.createElement("input");
+					submitBTN.setAttribute("type", "button");
+					submitBTN.setAttribute("onclick", "getCrystalID()")
+					submitBTN.setAttribute("value", "Get Crystal");
+
+					form.appendChild(id);
+					form.appendChild(submitBTN);
+
+					document.getElementsByTagName("body")[0].appendChild(form);
+					}
+				
+				if (dropdownValue == 'materials') {
+					
+					var br = document.createElement("br");
+					var form = document.createElement("form");
+					form.setAttribute("method", "post");
+					form.setAttribute("id", "formGet");
+					// Change this line later with getmapping
+					form.setAttribute("action", "submit");
+
+					var id = document.createElement("input");
+					id.setAttribute("type", "text");
+					id.setAttribute("name", "id");
+					id.setAttribute("placeholder", "id:");
+					id.setAttribute("id", "idFormGet");
+
+					var submitBTN = document.createElement("input");
+					submitBTN.setAttribute("type", "button");
+					submitBTN.setAttribute("onclick", "getMaterialID()")
+					submitBTN.setAttribute("value", "Get Material");
+
+					form.appendChild(id);
+					form.appendChild(submitBTN);
+
+					document.getElementsByTagName("body")[0].appendChild(form);
+					}
+        }
+        
+        function getPlanetID() {
+        	var id = document.getElementById('idFormGet').value;
+			console.log(id);
+			document.getElementById("formGet").style.display = "none";
+			
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/planets/get";
+			var finalUrl = theUrl + "/" + id;
+			console.log("URL " + theUrl);
+			console.log("FINALURL " + finalUrl);
+			xmlhttp.open('GET', finalUrl)
+			xmlhttp.send();
+			xmlhttp.onload = () =>{
+				console.log("response text " + xmlhttp.responseText);
+				document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+			}
+        }
+        
+        function getStarID() {
+        	var id = document.getElementById('idFormGet').value;
+			console.log(id);
+			document.getElementById("formGet").style.display = "none";
+			
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/stars/get";
+			var finalUrl = theUrl + "/" + id;
+			console.log("URL " + theUrl);
+			console.log("FINALURL " + finalUrl);
+			xmlhttp.open('GET', finalUrl)
+			xmlhttp.send();
+			xmlhttp.onload = () =>{
+				console.log("response text " + xmlhttp.responseText);
+				document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+			}
+			
+        }
+        
+        function getCrystalID() {
+        	var id = document.getElementById('idFormGet').value;
+			console.log(id);
+			document.getElementById("formGet").style.display = "none";
+			
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/crystals/get";
+			var finalUrl = theUrl + "/" + id;
+			console.log("URL " + theUrl);
+			console.log("FINALURL " + finalUrl);
+			xmlhttp.open('GET', finalUrl)
+			xmlhttp.send();
+			xmlhttp.onload = () =>{
+				console.log("response text " + xmlhttp.responseText);
+				document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+			}
+        }
+			function getMaterialID() {
+	        	var id = document.getElementById('idFormGet').value;
+				console.log(id);
+				document.getElementById("formGet").style.display = "none";
+				
+				var xmlhttp = new XMLHttpRequest();
+				var theUrl = "http://localhost:8089/api/user/materials/get";
+				var finalUrl = theUrl + "/" + id;
+				console.log("URL " + theUrl);
+				console.log("FINALURL " + finalUrl);
+				xmlhttp.open('GET', finalUrl)
+				xmlhttp.send();
+				xmlhttp.onload = () =>{
+					console.log("response text " + xmlhttp.responseText);
+					document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+				}
+			}
+
+	//ADD function
+	
+	
+		function add() {
+			//document.getElementById("demo").style.display = "none";
+			var dropdown = document.getElementById("dropdown");
+			var dropdownValue = dropdown.value;
+			console.log(dropdownValue);
+			//var radioAdd = document.getElementById("add").checked;
+			var demo = document.createElement("p");
+			demo.setAttribute("id", "demo");
+			//document.getElementById("demo").style.display = "none";
+
+			//planets
+			if (dropdownValue == 'planets') {
+				//document.getElementById("demo").style.display = "none";
+				console.log("dropdownPlanet == 'planets'")
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var climate = document.createElement("input");
+				climate.setAttribute("type", "text");
+				climate.setAttribute("name", "climate");
+				climate.setAttribute("placeholder", "climate:");
+				climate.setAttribute("id", "climateForm");
+
+				var rotation_period = document.createElement("input");
+				rotation_period.setAttribute("type", "text");
+				rotation_period.setAttribute("name", "Rotation Period");
+				rotation_period.setAttribute("placeholder", "Rotation Period:");
+				rotation_period.setAttribute("id", "rpForm");
+
+				var orbital_period = document.createElement("input");
+				orbital_period.setAttribute("type", "text");
+				orbital_period.setAttribute("name", "Orbital Period");
+				orbital_period.setAttribute("placeholder", "Orbital Period:");
+				orbital_period.setAttribute("id", "opForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getValues()")
+				submitBTN.setAttribute("value", "Add Planet!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(climate);
+				form.appendChild(br.cloneNode());
+				form.appendChild(rotation_period);
+				form.appendChild(br.cloneNode());
+				form.appendChild(orbital_period);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+				//form.reset();
+			}
+
+			//crystals
+			if (dropdownValue == 'crystals') {
+				//document.getElementById("demo").style.display = "none";
+				console.log("dropdownValue == 'crystals'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				//create form
+				var cform = document.createElement("form");
+				cform.setAttribute("method", "post");
+				cform.setAttribute("id", "cform");
+				cform.setAttribute("action", "submit");
+
+				//id
+				var cid = document.createElement("input");
+				cid.setAttribute("type", "text");
+				cid.setAttribute("name", "id");
+				cid.setAttribute("placeholder", "id:");
+				cid.setAttribute("id", "cid");
+
+				//name
+				var cname = document.createElement("input");
+				cname.setAttribute("type", "text");
+				cname.setAttribute("name", "name");
+				cname.setAttribute("placeholder", "Name:");
+				cname.setAttribute("id", "cname");
+
+				//color
+				var ccolor = document.createElement("input");
+				ccolor.setAttribute("type", "text");
+				ccolor.setAttribute("name", "color");
+				ccolor.setAttribute("placeholder", "Color:");
+				ccolor.setAttribute("id", "ccolor");
+
+				//rarity
+				var crarity = document.createElement("input");
+				crarity.setAttribute("type", "text");
+				crarity.setAttribute("name", "name");
+				crarity.setAttribute("placeholder", "Rarity:");
+				crarity.setAttribute("id", "crarity");
+
+				//sp
+				var csp = document.createElement("input");
+				csp.setAttribute("type", "text");
+				csp.setAttribute("name", "name");
+				csp.setAttribute("placeholder", "Special Power:");
+				csp.setAttribute("id", "csp");
+
+				//op
+				var cop = document.createElement("input");
+				cop.setAttribute("type", "text");
+				cop.setAttribute("name", "name");
+				cop.setAttribute("placeholder", "Origin Planet:");
+				cop.setAttribute("id", "cop");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getCrystalValues()")
+				submitBTN.setAttribute("value", "Add Crystal!");
+
+				cform.appendChild(cid);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(cname);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(ccolor);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(crarity);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(csp);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(cop);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(submitBTN)
+
+				document.getElementsByTagName("body")[0].appendChild(cform);
+
+			}
+
+			//stars
+			if (dropdownValue == 'stars') {
+				//document.getElementById("demo").style.display = "none";
+				console.log("dropdownValue == 'stars'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var brightness = document.createElement("input");
+				brightness.setAttribute("type", "text");
+				brightness.setAttribute("name", "brightness");
+				brightness.setAttribute("placeholder", "brightness:");
+				brightness.setAttribute("id", "brightness");
+
+				var color = document.createElement("input");
+				color.setAttribute("type", "text");
+				color.setAttribute("name", "color");
+				color.setAttribute("placeholder", "color:");
+				color.setAttribute("id", "color");
+
+				var mass = document.createElement("input");
+				mass.setAttribute("type", "text");
+				mass.setAttribute("name", "mass");
+				mass.setAttribute("placeholder", "mass:");
+				mass.setAttribute("id", "massForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getStarValues()")
+				submitBTN.setAttribute("value", "Add Star!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(brightness);
+				form.appendChild(br.cloneNode());
+				form.appendChild(color);
+				form.appendChild(br.cloneNode());
+				form.appendChild(mass);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+			//materials
+			if (dropdownValue == 'materials') {
+				//document.getElementById("demo").style.display = "none";
+				console.log("dropdownValue == 'materials'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var originPlanet = document.createElement("input");
+				originPlanet.setAttribute("type", "text");
+				originPlanet.setAttribute("name", "originPlanet");
+				originPlanet.setAttribute("placeholder", "Origin Planet:");
+				originPlanet.setAttribute("id", "originPlanetForm");
+
+				var rarity = document.createElement("input");
+				rarity.setAttribute("type", "text");
+				rarity.setAttribute("name", "name");
+				rarity.setAttribute("placeholder", "rarity:");
+				rarity.setAttribute("id", "rarityForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getMaterialValues()")
+				submitBTN.setAttribute("value", "Add Material!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(originPlanet);
+				form.appendChild(br.cloneNode());
+				form.appendChild(rarity);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+		}
+
+		function getMaterialValues() {
+			var idValue = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var opValue = document.getElementById("originPlanetForm").value;
+			var rarityValue = document.getElementById("rarityForm").value;
+
+			document.getElementById("form").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/addMaterial";
+			xmlhttp.open("POST", theUrl)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : idValue,
+				"name" : nameValue,
+				"originPlanet" : opValue,
+				"rarity" : rarityValue
+			}));
+
+			document.getElementById("demo").innerHTML = "Material Successfully Added.";
+
+		}
+
+		function getStarValues() {
+			var idValue = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var bValue = document.getElementById("brightness").value;
+			var cValue = document.getElementById("color").value;
+			var mValue = document.getElementById("massForm").value;
+
+			document.getElementById("form").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/addStar";
+			xmlhttp.open("POST", theUrl)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : idValue,
+				"name" : nameValue,
+				"brightness" : bValue,
+				"color" : cValue,
+				"mass" : mValue
+			}));
+			document.getElementById("demo").innerHTML = "Star Successfully Added.";
+
+		}
+
+		function getCrystalValues() {
+			
+			var cid = document.getElementById("cid").value;
+			var cname = document.getElementById("cname").value;
+			var ccolor = document.getElementById("ccolor").value;
+			var crarity = document.getElementById("crarity").value;
+			var csp = document.getElementById("csp").value;
+			var cop = document.getElementById("cop").value;
+
+			document.getElementById("cform").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/addCrystal";
+			xmlhttp.open("POST", theUrl)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : cid,
+				"name" : cname,
+				"color" : ccolor,
+				"rarity" : crarity,
+				"specialPower" : csp,
+				"originPlanet" : cop
+			}));
+			document.getElementById("demo").innerHTML = "Crystal Successfully Added.";
+
+			console.log("id: " + cid + ", name: " + cname + " , color: "
+					+ ccolor + " , rarity: " + crarity + " , Special Power: "
+					+ csp + ", Origin Planet: " + cop);
+
+		}
+
+		function getValues() {
+			var idValue = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var climateValue = document.getElementById("climateForm").value;
+			var rpValue = document.getElementById("rpForm").value;
+			var opValue = document.getElementById("opForm").value;
+			//document.getElementById("idForm").value;
+
+			//document.getElementById('demo').innerHTML = idValue + " " + nameValue + " " + climateValue + " " + rpValue + " " + opValue;
+			document.getElementById("form").style.display = "none";
+			//document.getElementById('demo').innerHTML = "1Planet Added!";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/addPlanet";
+			xmlhttp.open("POST", theUrl)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : idValue,
+				"name" : nameValue,
+				"climate" : climateValue,
+				"rotation_period" : rpValue,
+				"orbital_period" : opValue
+			}));
+			document.getElementById("demo").innerHTML = "Planet Successfully Added.";
+
+			console.log("id: " + idValue + ", name: " + nameValue
+					+ " , climate: " + climateValue + " , rotation_period: "
+					+ rpValue + " , obital_period: " + opValue)
+			//document.getElementById('demo').innerHTML = "Planet Successfully Added."
+		}
+
+		function deleteEntry() {
+			var dropdown = document.getElementById("dropdown");
+			var dropdownValue = dropdown.value;
+			console.log(dropdownValue);
+			//var radioAdd = document.getElementById("delete").checked;
+			var demo = document.createElement("p");
+			demo.setAttribute("id", "demo");
+
+			if (dropdownValue == 'planets') {
+				//document.getElementById('demo').innerHTML = "Hello";
+
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formDelete");
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormDelete");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getValue()")
+				submitBTN.setAttribute("value", "Delete Planet");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+			if (dropdownValue == 'materials') {
+				//document.getElementById('demo').innerHTML = "Hello";
+
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formDelete");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormDelete");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getMaterialValue()")
+				submitBTN.setAttribute("value", "Delete Material");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+			if (dropdownValue == 'crystals') {
+				//document.getElementById('demo').innerHTML = "Hello";
+
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formDelete");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormDelete");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getCrystalValue()")
+				submitBTN.setAttribute("value", "Delete Crystal");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+			if (dropdownValue == 'stars') {
+				//document.getElementById('demo').innerHTML = "Hello";
+
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "formDelete");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idFormDelete");
+
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "getStarValue()")
+				submitBTN.setAttribute("value", "Delete Star");
+
+				form.appendChild(id);
+				form.appendChild(submitBTN);
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+		}
+
+		function getStarValue() {
+			var id = document.getElementById('idFormDelete').value;
+			console.log(id);
+			document.getElementById("formDelete").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/stars/delete";
+			var finalUrl = theUrl + '/' + id;
+			console.log(finalUrl);
+			document.getElementById('demo').innerHTML = finalUrl;
+
+			xmlhttp.open("DELETE", finalUrl);
+			document.getElementById('demo').innerHTML = "Star Deleted";
+		}
+
+		function getMaterialValue() {
+			var id = document.getElementById('idFormDelete').value;
+			console.log(id);
+			document.getElementById("formDelete").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/materials/delete";
+			var finalUrl = theUrl + '/' + id;
+			console.log(finalUrl);
+			document.getElementById('demo').innerHTML = finalUrl;
+
+			xmlhttp.open("DELETE", finalUrl);
+			xmlhttp.send();
+			document.getElementById('demo').innerHTML = "Deleted material";
+		}
+
+		function getCrystalValue() {
+			var id = document.getElementById('idFormDelete').value;
+			console.log(id);
+			document.getElementById("formDelete").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/crystals/delete";
+			var finalUrl = theUrl + '/' + id;
+			console.log(finalUrl);
+			document.getElementById('demo').innerHTML = finalUrl;
+
+			xmlhttp.open("DELETE", finalUrl);
+			document.getElementById('demo').innerHTML = "Crystal Deleted!";
+		}
+
+		function getValue() {
+
+			var id = document.getElementById('idFormDelete').value;
+			console.log(id);
+			document.getElementById("formDelete").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/planets/delete";
+			var finalUrl = theUrl + '/' + id;
+			console.log(finalUrl);
+			document.getElementById('demo').innerHTML = finalUrl;
+
+			xmlhttp.open("DELETE", finalUrl);
+			xmlhttp.send();
+
+			document.getElementById('demo').innerHTML = "Planet Deleted!";
+		}
+
+		function getAll() {
+			var dropdown = document.getElementById("dropdown");
+			var dropdownValue = dropdown.value;
+			console.log(dropdownValue);
+			
+		
+			if (dropdownValue == 'planets') {
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/user/planets/getAllEntries";
+			xmlhttp.open('GET', theUrl)
+			xmlhttp.send();
+			xmlhttp.onload = () =>{
+				console.log(xmlhttp.responseText);
+				document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+			}
+			}
+			
+			if (dropdownValue == 'crystals') {
+				var xmlhttp = new XMLHttpRequest();
+				var theUrl = "http://localhost:8089/api/user/crystals/getAllEntries";
+				xmlhttp.open('GET', theUrl)
+				xmlhttp.send();
+				xmlhttp.onload = () =>{
+					console.log(xmlhttp.responseText);
+					document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+				
+			}
+			}
+				
+				if (dropdownValue == 'stars') {
+					var xmlhttp = new XMLHttpRequest();
+					var theUrl = "http://localhost:8089/api/user/stars/getAllEntries";
+					xmlhttp.open('GET', theUrl)
+					xmlhttp.send();
+					xmlhttp.onload = () =>{
+						console.log(xmlhttp.responseText);
+						document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+					}
+				}
+				
+				
+				if (dropdownValue == 'materials') {
+				var xmlhttp = new XMLHttpRequest();
+				var theUrl = "http://localhost:8089/api/user/materials/getAllEntries";
+				xmlhttp.open('GET', theUrl)
+				xmlhttp.send();
+				xmlhttp.onload = () =>{
+					console.log(xmlhttp.responseText);
+					document.querySelector("#myResponse").innerHTML = xmlhttp.responseText;
+
+				}
+			}
+		}
+		
+		
+		//UPDATE 
+		
+		function update() {
+			var dropdown = document.getElementById("dropdown");
+			var dropdownValue = dropdown.value;
+			console.log(dropdownValue);
+			
+			if (dropdownValue == 'planets') {
+				var br = document.createElement("br");
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var climate = document.createElement("input");
+				climate.setAttribute("type", "text");
+				climate.setAttribute("name", "climate");
+				climate.setAttribute("placeholder", "climate:");
+				climate.setAttribute("id", "climateForm");
+
+				var rotation_period = document.createElement("input");
+				rotation_period.setAttribute("type", "text");
+				rotation_period.setAttribute("name", "Rotation Period");
+				rotation_period.setAttribute("placeholder", "Rotation Period:");
+				rotation_period.setAttribute("id", "rpForm");
+
+				var orbital_period = document.createElement("input");
+				orbital_period.setAttribute("type", "text");
+				orbital_period.setAttribute("name", "Orbital Period");
+				orbital_period.setAttribute("placeholder", "Orbital Period:");
+				orbital_period.setAttribute("id", "opForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "updatePlanet()")
+				submitBTN.setAttribute("value", "Update Planet!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(climate);
+				form.appendChild(br.cloneNode());
+				form.appendChild(rotation_period);
+				form.appendChild(br.cloneNode());
+				form.appendChild(orbital_period);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+				//form.reset();
+		}
+			
+			//crystals
+			if (dropdownValue == 'crystals') {
+				console.log("dropdownValue == 'crystals'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				//create form
+				var cform = document.createElement("form");
+				cform.setAttribute("method", "post");
+				cform.setAttribute("id", "cform");
+				cform.setAttribute("action", "submit");
+
+				//id
+				var cid = document.createElement("input");
+				cid.setAttribute("type", "text");
+				cid.setAttribute("name", "id");
+				cid.setAttribute("placeholder", "id:");
+				cid.setAttribute("id", "cid");
+
+				//name
+				var cname = document.createElement("input");
+				cname.setAttribute("type", "text");
+				cname.setAttribute("name", "name");
+				cname.setAttribute("placeholder", "Name:");
+				cname.setAttribute("id", "cname");
+
+				//color
+				var ccolor = document.createElement("input");
+				ccolor.setAttribute("type", "text");
+				ccolor.setAttribute("name", "color");
+				ccolor.setAttribute("placeholder", "Color:");
+				ccolor.setAttribute("id", "ccolor");
+
+				//rarity
+				var crarity = document.createElement("input");
+				crarity.setAttribute("type", "text");
+				crarity.setAttribute("name", "name");
+				crarity.setAttribute("placeholder", "Rarity:");
+				crarity.setAttribute("id", "crarity");
+
+				//sp
+				var csp = document.createElement("input");
+				csp.setAttribute("type", "text");
+				csp.setAttribute("name", "name");
+				csp.setAttribute("placeholder", "Special Power:");
+				csp.setAttribute("id", "csp");
+
+				//op
+				var cop = document.createElement("input");
+				cop.setAttribute("type", "text");
+				cop.setAttribute("name", "name");
+				cop.setAttribute("placeholder", "Origin Planet:");
+				cop.setAttribute("id", "cop");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "updateCrystal()")
+				submitBTN.setAttribute("value", "Update Crystal!");
+
+				cform.appendChild(cid);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(cname);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(ccolor);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(crarity);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(csp);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(cop);
+				cform.appendChild(br.cloneNode());
+				cform.appendChild(submitBTN)
+
+				document.getElementsByTagName("body")[0].appendChild(cform);
+
+			}
+
+			//stars
+			if (dropdownValue == 'stars') {
+				console.log("dropdownValue == 'stars'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var brightness = document.createElement("input");
+				brightness.setAttribute("type", "text");
+				brightness.setAttribute("name", "brightness");
+				brightness.setAttribute("placeholder", "brightness:");
+				brightness.setAttribute("id", "brightness");
+
+				var color = document.createElement("input");
+				color.setAttribute("type", "text");
+				color.setAttribute("name", "color");
+				color.setAttribute("placeholder", "color:");
+				color.setAttribute("id", "color");
+
+				var mass = document.createElement("input");
+				mass.setAttribute("type", "text");
+				mass.setAttribute("name", "mass");
+				mass.setAttribute("placeholder", "mass:");
+				mass.setAttribute("id", "massForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "updateStar()")
+				submitBTN.setAttribute("value", "Update Star!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(brightness);
+				form.appendChild(br.cloneNode());
+				form.appendChild(color);
+				form.appendChild(br.cloneNode());
+				form.appendChild(mass);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+
+			//materials
+			if (dropdownValue == 'materials') {
+				console.log("dropdownValue == 'materials'");
+				var br = document.createElement("br");
+				var demo = document.createElement("p");
+				demo.setAttribute("id", "demo");
+
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("id", "form");
+				// Change this line later with getmapping
+				form.setAttribute("action", "submit");
+
+				var id = document.createElement("input");
+				id.setAttribute("type", "text");
+				id.setAttribute("name", "id");
+				id.setAttribute("placeholder", "id:");
+				id.setAttribute("id", "idForm");
+
+				var name = document.createElement("input");
+				name.setAttribute("type", "text");
+				name.setAttribute("name", "name");
+				name.setAttribute("placeholder", "name:");
+				name.setAttribute("id", "nameForm");
+
+				var originPlanet = document.createElement("input");
+				originPlanet.setAttribute("type", "text");
+				originPlanet.setAttribute("name", "originPlanet");
+				originPlanet.setAttribute("placeholder", "Origin Planet:");
+				originPlanet.setAttribute("id", "originPlanetForm");
+
+				var rarity = document.createElement("input");
+				rarity.setAttribute("type", "text");
+				rarity.setAttribute("name", "name");
+				rarity.setAttribute("placeholder", "rarity:");
+				rarity.setAttribute("id", "rarityForm");
+
+				//submit button
+				var submitBTN = document.createElement("input");
+				submitBTN.setAttribute("type", "button");
+				submitBTN.setAttribute("onclick", "updateMaterial()")
+				submitBTN.setAttribute("value", "Update material!");
+
+				form.appendChild(id);
+				form.appendChild(br.cloneNode());
+				form.appendChild(name);
+				form.appendChild(br.cloneNode());
+				form.appendChild(originPlanet);
+				form.appendChild(br.cloneNode());
+				form.appendChild(rarity);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submitBTN);
+				form.appendChild(br.cloneNode());
+
+				document.getElementsByTagName("body")[0].appendChild(form);
+
+			}
+		}
+		
+		function updatePlanet() {
+			var url = "http://localhost:8089/api/admin/planets/update";
+			
+			var id = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var climateValue = document.getElementById("climateForm").value;
+			var rpValue = document.getElementById("rpForm").value;
+			var opValue = document.getElementById("opForm").value;
+			document.getElementById("idForm").style.display = "none";
+			
+			console.log(id);
+			
+			var finalUrl = url + "/" + id;
+			console.log(finalUrl);
+			
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("PUT", finalUrl);
+			xmlhttp.setRequestHeader('Content-type','application/json; charset=utf-8');
+			var json = JSON.stringify({
+				"id" : id,
+				"name" : nameValue,
+				"climate" : climateValue,
+				"rotation_period" : rpValue,
+				"orbital_period" : opValue
+			});
+			xmlhttp.send(json);
+			console.log("Updated");
+		}
+		
+		function updateCrystal() {
+			//var url = "http://localhost:8089/api/crystals/update";
+			
+			var cid = document.getElementById("cid").value;
+			var cname = document.getElementById("cname").value;
+			var ccolor = document.getElementById("ccolor").value;
+			var crarity = document.getElementById("crarity").value;
+			var csp = document.getElementById("csp").value;
+			var cop = document.getElementById("cop").value;
+
+			document.getElementById("cform").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/crystals/update";
+			var finalUrl = theUrl + "/" + cid;
+			xmlhttp.open("PUT", finalUrl)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			var json = JSON.stringify({
+				"id" : cid,
+				"name" : cname,
+				"color" : ccolor,
+				"rarity" : crarity,
+				"specialPower" : csp,
+				"originPlanet" : cop
+			});
+			xmlhttp.send(json);
+			console.log("Updated");
+			
+		}
+		
+		function updateStar() {
+			var idValue = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var bValue = document.getElementById("brightness").value;
+			var cValue = document.getElementById("color").value;
+			var mValue = document.getElementById("massForm").value;
+
+			document.getElementById("form").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/stars/update/";
+			xmlhttp.open("PUT", theUrl + idValue)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : idValue,
+				"name" : nameValue,
+				"brightness" : bValue,
+				"color" : cValue,
+				"mass" : mValue
+			}));
+			console.log("Updated");
+		}
+		
+		function updateMaterial() {
+			var idValue = document.getElementById("idForm").value;
+			var nameValue = document.getElementById("nameForm").value;
+			var opValue = document.getElementById("originPlanetForm").value;
+			var rarityValue = document.getElementById("rarityForm").value;
+
+			document.getElementById("form").style.display = "none";
+
+			var xmlhttp = new XMLHttpRequest();
+			var theUrl = "http://localhost:8089/api/admin/materials/update/";
+			xmlhttp.open("PUT", theUrl + idValue)
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({
+				"id" : idValue,
+				"name" : nameValue,
+				"originPlanet" : opValue,
+				"rarity" : rarityValue
+			}));
+			console.log("Updated");
+
+		}
+			
+			
+			
+	</script>
+
+</body>
+</html>
